@@ -61,11 +61,32 @@ def hexdump(s, dumpf, quiet):
     dump.write(s)
     dump.close()
     if quiet: return
-    for b in xrange(0, len(s), 16):
-        lin = [c for c in s[b : b + 16]]
-        hxdat = ' '.join('%02X' % ord(c) for c in lin)
-        pdat = ''.join((c if 32 <= ord(c) <= 126 else '.' )for c in lin)
-        print '  %04x: %-48s %s' % (b, hxdat, pdat)
+    pdat = ''.join((c if 32 <= ord(c) <= 126 else '#' )for c in s[0:len(s)])
+    #check to see if we can get any cookies
+    if "Cookie:" in pdat:
+        start = pdat.index("Cookie:")
+        #now check for a session token cookie
+        if "session=" in pdat[start:]:
+            #now get the actual token
+            token_indx = pdat.index("session=",start)
+            #look for the end of the token; 
+            #non alpha numeric chars in response are indicated by #
+            try:
+                token_end = pdat.index("#",token_indx)
+                token = pdat[token_indx+8:token_end]
+                print('session token found! ',token)
+            except:
+                print('no session token found')
+        else:
+            print('no session token found')
+    else:
+        print('no cookie data found')
+    #for b in xrange(0, len(s), 16):
+    #    lin = [c for c in s[b : b + 16]]
+    #    hxdat = ' '.join('%02X' % ord(c) for c in lin)
+    #    pdat = ''.join((c if 32 <= ord(c) <= 126 else '.' )for c in lin)
+    #    print '  %04x: %-48s %s' % (b, hxdat, pdat)
+    #    print '%s' % (pdat)
     print
 
 def recvall(s, length, timeout=5):

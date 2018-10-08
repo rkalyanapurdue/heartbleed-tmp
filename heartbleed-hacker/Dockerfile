@@ -1,6 +1,17 @@
-FROM ubuntu:18.04
+FROM dorowu/ubuntu-desktop-lxde-vnc:bionic
 
-RUN apt-get update
-RUN apt-get -y install python
+MAINTAINER Rajesh Kalyanam "rkalyanapurdue@gmail.com"
 
-ADD . /usr/local/bin/
+#add Python
+RUN apt-get update && apt-get -y install python
+
+#create a non-root user
+RUN useradd -d /home/hacker -m -s /bin/bash hacker
+
+RUN echo 'hacker:hacker' | chpasswd
+
+ADD hacker.py /home/hacker
+
+ENV USER=hacker \
+    PASSWORD=hacker 
+
