@@ -15,13 +15,35 @@ RUN dpkg -i /tmp/openssl_1.0.1f-1_amd64.deb
 #adds the snakeoil self signed certificate
 RUN apt-get -y install ssl-cert
 
+#install apache and wsgi to host the Flask app
+RUN apt-get -y install apache2 libapache2-mod-wsgi
+
 #Simple Flask based webapp
 RUN mkdir -p /srv/www/app
 
+#copy files over
 ADD app /srv/www/app
 
+#install Flask and related modules
 RUN pip install Flask Flask-Login Flask-WTF
+
+#copy conf files for our new app over to Apache's conf
+ADD conf /etc/apache2/sites-available
+
+#enable various Apache modules
+RUN a2enmod wsgi
+RUN a2enmod ssl
+RUN a2enmod rewrite
+
+#disable default sites and use our app
+RUN a2dissite 000-default
+RUN a2dissite default-ssl
+RUN a2ensite server
+RUN a2ensite server-ssl
 
 WORKDIR /srv/www/app
 
-CMD ["python","hello.py"]
+EXPOSE 80
+EXPOSE 443
+
+CMD ["/usr/sbin/apachectl","-DFOREGROUND"]

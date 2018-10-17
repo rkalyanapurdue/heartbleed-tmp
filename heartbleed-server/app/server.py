@@ -67,5 +67,4 @@ def login():
     return flask.render_template('login.html', form=form)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',ssl_context=('/etc/ssl/certs/ssl-cert-snakeoil.pem','/etc/ssl/private/ssl-cert-snakeoil.key'))
-    #app.run(host='0.0.0.0')
+    app.run()
