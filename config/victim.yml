@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: victim
+  labels:
+    app: heartbleed-victim
+spec:
+  containers:
+  - name: victim
+    image: rkalyana/heartbleed-victim
+    ports:
+    - containerPort: 80

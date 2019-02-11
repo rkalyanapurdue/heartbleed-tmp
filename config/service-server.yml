@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-server
+spec:
+  type: NodePort
+  ports:
+  - name: flask
+    port: 5000
+    protocol: TCP
+  selector:
+    app: heartbleed-server

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hacker
+  labels:
+    app: heartbleed-hacker
+spec:
+  containers:
+  - name: hacker
+    image: rkalyana/heartbleed-hacker
+    ports:
+    - containerPort: 80
