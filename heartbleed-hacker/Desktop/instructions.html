@@ -1,0 +1,22 @@
+<html>
+<head/>
+<body>
+<h1> Instructions for Reproducing the Heartbleed Bug </h1>
+
+<ol>
+<li> On the server Jupyter notebook page, launch a new terminal window from the top right corner.</li>
+<li> Determine the IP address of the server by typing <i>ifconfig</i> at the terminal prompt. </li>
+<li> On the hacker VNC window, launch the Firefox web browser from the bottom left corner. </li>
+<li> Attempt to login to the server webpage by navigating to the server's IP address in Firefox. </li>
+<li> Typically, a hacker is unaware of the valid login details for such a website; <br/> we will show 
+how the HeartBleed bug can be exploited to circumvent this requirement and access secured webpages on 
+the server.</li>
+<li> On the victim VNC window, launch the Firefox web browser from the bottom left corner. </li>
+<li> Login with the username <i>foo</i> and password <i>bar</i>. </li>
+<li> On the hacker VNC window, launch a terminal from the bottom left corner, under Administrative Tools.</li>
+<li> At the terminal prompt, run <i>python hacker.py</i>. The script should run and either print a string 
+as the session token; or fail to print anything.</li>
+<li> If a session token is obtained, set that token in your browser window under <i> Web Developer > Storage </i>.</li>
+</ol>
+</body>
+</html>

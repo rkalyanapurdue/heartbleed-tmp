@@ -10,7 +10,7 @@ RUN useradd -d /home/hacker -m -s /bin/bash hacker
 
 RUN echo 'hacker:hacker' | chpasswd
 
-ADD hacker.py /home/hacker
+ADD . /home/hacker
 
 ENV USER=hacker \
     PASSWORD=hacker 
