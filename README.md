@@ -76,7 +76,7 @@ host machine. Since we will only access the server website from inside the hacke
 of the exposed ports of the server container.
 
 ### Usage
-On navigating to the URL of the hacker container in your browser, you will be presented with Linux desktop interface. Double click the 
+On navigating to the URL of the hacker container in your browser, you will be presented with a Linux desktop interface. Double click the 
 *Instructions.html* file on the desktop to review the step-by-step instructions for following this demonstration. A new browser or terminal 
 window can be launched on the hacker and victim containers by selecting the program menu at the bottom left corner. The server's IP address 
 that the hacker and victim will use to access the server's hosted website can be obtained by starting a console on the server container 
